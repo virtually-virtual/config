@@ -1,0 +1,73 @@
+public:
+  app:
+    clientTitle: Clickto
+    skipCheck: true
+    appName: Clickto HTML5 Client
+    helpLink: https://help.clickto.camp/
+    copyright: "©2020 Clickto LTD"
+    forceListenOnly: true
+    listenOnlyMode: false
+    lockOnJoin: false
+    mirrorOwnWebcam: false
+  kurento:
+    autoShareWebcam: false
+    screenshare:
+      constraints:
+        video:
+          frameRate:
+            ideal: 5
+            max: 10
+          width:
+            max: 1920
+          height:
+            max: 1080
+        audio: false
+      chromeScreenshareSources:
+        - window
+        - screen
+      firefoxScreenshareSource: window    
+    cameraProfiles:
+      - id: high-1
+        name: High
+        bitrate: 50
+        hidden: false
+        constraints:
+          video:
+            frameRate: 3
+      - id: high-2
+        name: High
+        bitrate: 50
+        hidden: true
+        constraints:
+          video:
+            frameRate: 3
+      - id: high-3
+        name: High
+        bitrate: 50
+        hidden: true
+        constraints:
+          video:
+            frameRate: 3
+      - id: high-4
+        name: High
+        bitrate: 50
+        hidden: true
+        constraints:
+          video:
+            frameRate: 3
+      - id: high-5
+        name: High
+        bitrate: 50
+        hidden: true
+        constraints:
+          video:
+            frameRate: 3
+    pagination:
+      enabled: true
+      pageChangeDebounceTime: 2500
+      desktopPageSizes:
+        moderator: 15
+        viewer: 15
+      mobilePageSizes:
+        moderator: 4
+        viewer: 4
