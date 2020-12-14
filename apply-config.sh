@@ -27,7 +27,7 @@ yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.width.max 256
 yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.height.max 1440
 # Enable option to share screen with audio in supported browsers
 yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
-yq w -i $HTML5_CONFIG public.app.skipCheck false
+yq w -i $HTML5_CONFIG public.app.skipCheck true
 yq w -i $HTML5_CONFIG public.app.forceListenOnly false
 yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
