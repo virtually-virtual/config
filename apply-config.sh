@@ -28,7 +28,10 @@ yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.height.max 14
 # Enable option to share screen with audio in supported browsers
 yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
 yq w -i $HTML5_CONFIG public.app.skipCheck false
-
+yq w -i $HTML5_CONFIG public.app.forceListenOnly false
+yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
+ 
+ 
 echo "  - Setting camera defaults"
 yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 
@@ -62,7 +65,7 @@ yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 250
 echo "  - Setting camera thresholds"
 yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled true
-
+qqqqqqqqqqqqqqqqqqqqqqqqqqqq
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].threshold 1
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].profile high
 
