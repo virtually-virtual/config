@@ -65,7 +65,7 @@ yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 250
 echo "  - Setting camera thresholds"
 yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled true
-qqqqqqqqqqqqqqqqqqqqqqqqqqqq
+
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].threshold 1
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].profile high
 
