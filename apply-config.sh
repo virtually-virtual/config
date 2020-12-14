@@ -19,8 +19,7 @@ yq w -i $HTML5_CONFIG public.app.clientTitle "Clickto"
 yq w -i $HTML5_CONFIG public.app.appName "Clickto HTML5 Client"
 yq w -i $HTML5_CONFIG public.app.helpLink "https://help.clickto.camp/"
 yq w -i $HTML5_CONFIG public.app.copytight "©2020 Clickto LTD"
-yq w -i $HTML5_CONFIG public.app.defaultSettings.application.fallbackLocale "de"
-yq w -i $HTML5_CONFIG public.app.defaultSettings.application.overrideLocale "de"
+
 # Set Framerate and Resolution to high values - it will be throttled through bitrate
 yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.ideal 5
 yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.max 15
