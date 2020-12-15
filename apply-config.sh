@@ -33,6 +33,7 @@ yq w -i $HTML5_CONFIG public.app.forceListenOnly false
 yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
+ 
 echo "  - Setting camera defaults"
 yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 
@@ -111,6 +112,7 @@ sed -i 's|lockSettingsDisablePublicChat=.*|lockSettingsDisablePublicChat=false|g
 sed -i 's|lockSettingsDisableNote=.*|lockSettingsDisableNote=true|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsHideUserList=.*|lockSettingsHideUserList=false|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsDisableMic=.*|lockSettingsDisableMic=false|g' "$BBB_PROPERTIES"
+
 
 echo "  - Disable recording and keep events"
 sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=true|g' "$BBB_PROPERTIES"
