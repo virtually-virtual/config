@@ -1,11 +1,1 @@
-public:
-  app:
-    clientTitle: Clickto
-    skipCheck: true
-    appName: Clickto HTML5 Client
-    helpLink: https://help.clickto.camp/
-    copyright: "©2020 Clickto LTD"
-    forceListenOnly: true
-    listenOnlyMode: false
-    lockOnJoin: false
-    mirrorOwnWebcam: false
+
