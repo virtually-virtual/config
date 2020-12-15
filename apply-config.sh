@@ -11,6 +11,7 @@ FREESWITCH_CONF="/opt/freeswitch/etc/freeswitch/autoload_configs/conference.conf
 #Disable freeswitch sound
 sed -i 's/^      <param name="muted-sound" value="conference\/conf-muted\.wav"\/>/<!--      <param name="muted-sound" value="conference\/conf-muted\.wav"\/> -->/g' $FREESWITCH_CONF
 sed -i 's/^      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/>/<!--      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/> -->/g'  $FREESWITCH_CONF
+sed -i 's/^      <param name="alone-sound" value="conference\/conf-alone\.wav"\/>/<!--      <param name="alone-sound" value="conference\/conf-alone\.wav"\/> -->/g'  $FREESWITCH_CONF
 
 
 
@@ -102,18 +103,10 @@ sed -i 's|userInactivityInspectTimerInMinutes=.*|userInactivityInspectTimerInMin
 sed -i 's|userInactivityThresholdInMinutes=.*|userInactivityThresholdInMinutes=240|g' "$BBB_PROPERTIES"
 sed -i 's|muteOnStart=.*|muteOnStart=true|g' "$BBB_PROPERTIES"
 
-sed -i 's/^muteOnStart=.*/muteOnStart=true/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^disableRecordingDefaults=.*/DisableRecordingDefaults=true/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^autoStartRecording=.*/autoStartRecording=false/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^lockSettingsDisableCam=.*/lockSettingsDisableCam=false/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^lockSettingsDisableMic=.*/lockSettingsDisableMic=false/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^lockSettingsDisablePrivateChat=.*/lockSettingsDisablePrivateChat=true/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^lockSettingsDisablePublicChat=.*/lockSettingsDisablePublicChat=false/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
-sed -i 's/^lockSettingsDisableNote=.*/lockSettingsDisableNote=true/g' /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
 
 echo "  - Setting room restrictions"
-sed -i 's|lockSettingsDisableCam=.*|lockSettingsDisableCam=true|g' "$BBB_PROPERTIES"
-sed -i 's|lockSettingsDisablePrivateChat=.*|lockSettingsDisablePrivateChat=false|g' "$BBB_PROPERTIES"
+sed -i 's|lockSettingsDisableCam=.*|lockSettingsDisableCam=false|g' "$BBB_PROPERTIES"
+sed -i 's|lockSettingsDisablePrivateChat=.*|lockSettingsDisablePrivateChat=true|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsDisablePublicChat=.*|lockSettingsDisablePublicChat=false|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsDisableNote=.*|lockSettingsDisableNote=true|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsHideUserList=.*|lockSettingsHideUserList=false|g' "$BBB_PROPERTIES"
