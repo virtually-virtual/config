@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BUCKET=
+
 # The node id from this bbb instance as showed on the scalelite server
 NODE_ID=01234567-89ab-cdef-0123-456789abcdef
 
@@ -25,10 +27,41 @@ main()
   writeDisableRequest
   waitForDeactivation
   waitForMeetings
-  restartBigBlueButton
-  writeEnableRequest
-
+  waitArchiveRecordings
+  checkRecordings
   echo "  Finished graceful restart!"
+}
+
+countRecordings(){
+  kurentoWebcamFilesCount=$(ls -l //var/kurento/recordings | wc -l)
+  kurentoScreenshareFilesCount=$(ls -l /var/kurento/screenshare | wc -l)
+  freeswitchFilesCount=$(ls -l /var/freeswitch/meetings | wc -l)
+  
+  if [ $kurentoWebcamFilesCount -ge 0 ] || [ $kurentoScreenshareFilesCount -ge 0 ] || [ $freeswitchFilesCount -gt 0]; then
+     UNPROCESSED_STATUS=1
+  else
+     UNPROCESSED_STATUS=0
+  fi
+  echo -n "$UNPROCESSED_STATUS"
+}
+
+waitForRecordings(){
+  count=0
+  status=$(countRecordings())
+  echo -n "  - Waiting for recordings to render ..."
+  
+  while [[ $status -gt 0 ]]; do
+    echo -n "."
+    sleep 90
+    count=$count + 1
+    status=$(countRecordings())
+    if [ $count -gt 20 ];then
+       tar -czf $(hostname).tar.gz /var/freeswitch/meetings /var/kurento /var/bigbluebutton
+       aws s3 cp $(hostname).tar.gz s3://render-server
+       aws sns publish --topic-arn  arn:aws:sns:us-west-2:475610229463:RecordingStatus:0cbcd298-179d-4425-8a93-a08cbd2ec6ff --message "Archiving recordings too long!"
+    fi
+  done
+  aws s3 cp $(hostname)-archive.tar.gz s3://render-server
 }
 
 checkOpPending()
