@@ -8,6 +8,20 @@ KURENTO_CONF="/usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml"
 BBB_PROPERTIES="/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties"
 FREESWITCH_CONF="/opt/freeswitch/etc/freeswitch/autoload_configs/conference.conf.xml"
 
+# Main variables
+HOSTNAME=
+PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+# IP Address and Hostname configuration
+yq w -i $HTML5_CONFIG public.kurento.wsUrl wss://$instance_publichostname.us-rooms.clickto.camp/bbb-webrtc-sfu
+sed -i 's|bigbluebutton.web.serverURL=.*|bigbluebutton.web.serverURL=https://$instance_publichostname.us-rooms.clickto.camp|g' "$BBB_PROPERTIES"
+sed -i "s/proxy_pass .*/proxy_pass https:\/\/$PUBLIC_IP:7443;/g" /etc/bigbluebutton/nginx/sip.nginx
+xmlstarlet edit --inplace --update '//X-PRE-PROCESS[@cmd="set" and starts-with(@data, "external_rtp_ip=")]/@data' --value "external_rtp_ip=$PUBLIC_IP" /opt/freeswitch/etc/freeswitch/vars.xml
+xmlstarlet edit --inplace --update '//X-PRE-PROCESS[@cmd="set" and starts-with(@data, "external_sip_ip=")]/@data' --value "external_sip_ip=$PUBLIC_IP" /opt/freeswitch/etc/freeswitch/vars.xml
+yq w -i $HTML5 kurento[0].ip "$PUBLIC_IP"
+yq w -i $HTML5 freeswitch.ip "$PUBLIC_IP"
+yq w -i $HTML5 freeswitch.sip_ip "$PUBLIC_IP"
+xmlstarlet edit --inplace --update '//param[@name="wss-binding"]/@value' --value "$PUBLIC_IP:7443" /opt/freeswitch/conf/sip_profiles/external.xml
+
 #Disable freeswitch sound
 sed -i 's/^      <param name="muted-sound" value="conference\/conf-muted\.wav"\/>/<!--      <param name="muted-sound" value="conference\/conf-muted\.wav"\/> -->/g' $FREESWITCH_CONF
 sed -i 's/^      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/>/<!--      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/> -->/g'  $FREESWITCH_CONF
@@ -39,7 +53,7 @@ yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
@@ -47,25 +61,25 @@ yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id low
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Low"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id medium
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Medium"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id high
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id hd
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "High Definition"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 50
 
@@ -118,11 +132,14 @@ sed -i 's|lockSettingsDisableNote=.*|lockSettingsDisableNote=true|g' "$BBB_PROPE
 sed -i 's|lockSettingsHideUserList=.*|lockSettingsHideUserList=false|g' "$BBB_PROPERTIES"
 sed -i 's|lockSettingsDisableMic=.*|lockSettingsDisableMic=false|g' "$BBB_PROPERTIES"
 
+echo " - Dont allow duplicate UserExt"
+sed -i 's|allowDuplicateExtUserid=.*|allowDuplicateExtUserid=false|g' "$BBB_PROPERTIES"
 
 echo "  - Disable recording and keep events"
 sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=true|g' "$BBB_PROPERTIES"
 sed -i 's|allowStartStopRecording=.*|allowStartStopRecording=true|g' "$BBB_PROPERTIES"
 sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
+
 
 
 echo " - Enable multiple Kurento proccesses"
