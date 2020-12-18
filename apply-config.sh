@@ -39,7 +39,7 @@ yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default True
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
@@ -48,26 +48,26 @@ yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id low
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Low"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 100
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id medium
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Medium"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 150
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id high
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 200
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id hd
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "High Definition"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 250
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 50
 
 echo "  - Setting camera thresholds"
 yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
@@ -100,8 +100,8 @@ echo " - Setting BigBlueButton-Options"
 sed -i 's|beans.presentationService.defaultUploadedPresentation=.*|beans.presentationService.defaultUploadedPresentation=${bigbluebutton.web.serverURL}/default.pdf|g' "$BBB_PROPERTIES"
 
 sed -i 's|maxFileSizeUpload=.*|maxFileSizeUpload=30000000|g' "$BBB_PROPERTIES"
-sed -i 's|defaultWelcomeMessage=.*|defaultWelcomeMessage=|g' "$BBB_PROPERTIES"
-sed -i 's|defaultWelcomeMessageFooter=.*|defaultWelcomeMessageFooter=|g' "$BBB_PROPERTIES"
+sed -i 's|defaultWelcomeMessage=.*|defaultWelcomeMessage=Welcome|g' "$BBB_PROPERTIES"
+sed -i 's|defaultWelcomeMessageFooter=.*|defaultWelcomeMessageFooter=Welcome|g' "$BBB_PROPERTIES"
 sed -i 's|allowModsToUnmuteUsers=.*|allowModsToUnmuteUsers=false|g' "$BBB_PROPERTIES"
 sed -i 's|meetingExpireIfNoUserJoinedInMinutes=.*|meetingExpireIfNoUserJoinedInMinutes=60|g' "$BBB_PROPERTIES"
 sed -i 's|meetingExpireWhenLastUserLeftInMinutes=.*|meetingExpireWhenLastUserLeftInMinutes=60|g' "$BBB_PROPERTIES"
