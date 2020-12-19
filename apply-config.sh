@@ -15,7 +15,7 @@ PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 # IP Address and Hostname configuration
 
 # HTML5 Addresses
-yq w -i $HTML5 public.kurento.wsUrl wss://dev.us-rooms.clickto.camp/bbb-webrtc-sfu
+yq w -i $HTML5_CONFIG public.kurento.wsUrl wss://dev.us-rooms.clickto.camp/bbb-webrtc-sfu
 yq w -i $KURENTO_CONF kurento[0].ip "$PUBLIC_IP"
 yq w -i $KURENTO_CONF freeswitch.ip "$PUBLIC_IP"
 yq w -i $KURENTO_CONF freeswitch.sip_ip "$PRIVATE_IP"
