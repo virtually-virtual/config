@@ -7,7 +7,7 @@ source /etc/bigbluebutton/bbb-conf/apply-lib.sh
 KURENTO_CONF="/usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml"
 BBB_PROPERTIES="/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties"
 FREESWITCH_CONF="/opt/freeswitch/etc/freeswitch/autoload_configs/conference.conf.xml"
-HTML5="/usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml"
+HTML5_CONFIG="/usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml"
 # Dynamic variables
 PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
 PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
