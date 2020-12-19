@@ -7,22 +7,36 @@ source /etc/bigbluebutton/bbb-conf/apply-lib.sh
 KURENTO_CONF="/usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml"
 BBB_PROPERTIES="/usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties"
 FREESWITCH_CONF="/opt/freeswitch/etc/freeswitch/autoload_configs/conference.conf.xml"
-
-# Main variables
-HOSTNAME=
+HTML5="/usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml"
+# Dynamic variables
 PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+
 # IP Address and Hostname configuration
-yq w -i $HTML5_CONFIG public.kurento.wsUrl wss://$instance_publichostname.us-rooms.clickto.camp/bbb-webrtc-sfu
-sed -i 's|bigbluebutton.web.serverURL=.*|bigbluebutton.web.serverURL=https://$instance_publichostname.us-rooms.clickto.camp|g' "$BBB_PROPERTIES"
+
+# HTML5 Addresses
+yq w -i $HTML5 public.kurento.wsUrl wss://dev.us-rooms.clickto.camp/bbb-webrtc-sfu
+yq w -i $KURENTO_CONF kurento[0].ip "$PUBLIC_IP"
+yq w -i $KURENTO_CONF freeswitch.ip "$PUBLIC_IP"
+yq w -i $KURENTO_CONF freeswitch.sip_ip "$PRIVATE_IP"
+
+# Properties
+sed -i 's|bigbluebutton.web.serverURL=.*|bigbluebutton.web.serverURL=https://dev.us-rooms.clickto.camp|g' "$BBB_PROPERTIES"
+sed -i "s/bbb\.sip\.app\.ip=.*/bbb\.sip\.app.ip=$PRIVATE_IP/g" /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
+sed -i "s/freeswitch\.ip=.*/freeswitch\.ip=$PRIVATE_IP/g" /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
+# Nginx address
 sed -i "s/proxy_pass .*/proxy_pass https:\/\/$PUBLIC_IP:7443;/g" /etc/bigbluebutton/nginx/sip.nginx
+sed -i "s/SERVERNAME_PLACEHOLDER/$instance_publichostname/g" /etc/nginx/sites-available/bigbluebutton
+
+# Freeswitch addresses
 xmlstarlet edit --inplace --update '//X-PRE-PROCESS[@cmd="set" and starts-with(@data, "external_rtp_ip=")]/@data' --value "external_rtp_ip=$PUBLIC_IP" /opt/freeswitch/etc/freeswitch/vars.xml
 xmlstarlet edit --inplace --update '//X-PRE-PROCESS[@cmd="set" and starts-with(@data, "external_sip_ip=")]/@data' --value "external_sip_ip=$PUBLIC_IP" /opt/freeswitch/etc/freeswitch/vars.xml
-yq w -i $HTML5 kurento[0].ip "$PUBLIC_IP"
-yq w -i $HTML5 freeswitch.ip "$PUBLIC_IP"
-yq w -i $HTML5 freeswitch.sip_ip "$PUBLIC_IP"
+xmlstarlet edit --inplace --update '//X-PRE-PROCESS[@cmd="set" and starts-with(@data, "local_ip_v4=")]/@data' --value "local_ip_v4=$PRIVATE_IP" /opt/freeswitch/etc/freeswitch/vars.xml
 xmlstarlet edit --inplace --update '//param[@name="wss-binding"]/@value' --value "$PUBLIC_IP:7443" /opt/freeswitch/conf/sip_profiles/external.xml
 
-#Disable freeswitch sound
+
+
+# Remove sounds
 sed -i 's/^      <param name="muted-sound" value="conference\/conf-muted\.wav"\/>/<!--      <param name="muted-sound" value="conference\/conf-muted\.wav"\/> -->/g' $FREESWITCH_CONF
 sed -i 's/^      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/>/<!--      <param name="unmuted-sound" value="conference\/conf-unmuted\.wav"\/> -->/g'  $FREESWITCH_CONF
 sed -i 's/^      <param name="alone-sound" value="conference\/conf-alone\.wav"\/>/<!--      <param name="alone-sound" value="conference\/conf-alone\.wav"\/> -->/g'  $FREESWITCH_CONF
