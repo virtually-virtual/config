@@ -19,9 +19,9 @@ yq w -i $HTML5_CONFIG public.kurento.wsUrl wss://dev.us-rooms.clickto.camp/bbb-w
 yq w -i $KURENTO_CONF kurento[0].ip "$PUBLIC_IP"
 yq w -i $KURENTO_CONF freeswitch.ip "$PUBLIC_IP"
 yq w -i $KURENTO_CONF freeswitch.sip_ip "$PRIVATE_IP"
-
+yq w -i $KURENTO_CONF localIpAddress "$PRIVATE_IP"
 # Properties
-sed -i 's|bigbluebutton.web.serverURL=.*|bigbluebutton.web.serverURL=https://dev.us-rooms.clickto.camp|g' "$BBB_PROPERTIES"
+sed -i 's|bigbluebutton.web.serverURL=.*|bigbluebutton.web.serverURL=https://room14.us-rooms.clickto.camp|g' "$BBB_PROPERTIES"
 sed -i "s/bbb\.sip\.app\.ip=.*/bbb\.sip\.app.ip=$PRIVATE_IP/g" /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
 sed -i "s/freeswitch\.ip=.*/freeswitch\.ip=$PRIVATE_IP/g" /usr/share/red5/webapps/sip/WEB-INF/bigbluebutton-sip.properties
 # Nginx address
