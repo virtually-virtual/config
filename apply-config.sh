@@ -41,18 +41,10 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
 echo "  - Setting camera defaults"
 yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal 32
-
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id low
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Low"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "High"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
 
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id medium
@@ -107,9 +99,9 @@ sed -i 's|maxFileSizeUpload=.*|maxFileSizeUpload=30000000|g' "$BBB_PROPERTIES"
 sed -i 's|defaultWelcomeMessage=.*|defaultWelcomeMessage=Welcome|g' "$BBB_PROPERTIES"
 sed -i 's|defaultWelcomeMessageFooter=.*|defaultWelcomeMessageFooter=Welcome|g' "$BBB_PROPERTIES"
 sed -i 's|allowModsToUnmuteUsers=.*|allowModsToUnmuteUsers=false|g' "$BBB_PROPERTIES"
-sed -i 's|meetingExpireIfNoUserJoinedInMinutes=.*|meetingExpireIfNoUserJoinedInMinutes=60|g' "$BBB_PROPERTIES"
-sed -i 's|meetingExpireWhenLastUserLeftInMinutes=.*|meetingExpireWhenLastUserLeftInMinutes=60|g' "$BBB_PROPERTIES"
-sed -i 's|userInactivityInspectTimerInMinutes=.*|userInactivityInspectTimerInMinutes=240|g' "$BBB_PROPERTIES"
+sed -i 's|meetingExpireIfNoUserJoinedInMinutes=.*|meetingExpireIfNoUserJoinedInMinutes=5|g' "$BBB_PROPERTIES"
+sed -i 's|meetingExpireWhenLastUserLeftInMinutes=.*|meetingExpireWhenLastUserLeftInMinutes=5|g' "$BBB_PROPERTIES"
+sed -i 's|userInactivityInspectTimerInMinutes=.*|userInactivityInspectTimerInMinutes=60|g' "$BBB_PROPERTIES"
 sed -i 's|userInactivityThresholdInMinutes=.*|userInactivityThresholdInMinutes=240|g' "$BBB_PROPERTIES"
 sed -i 's|muteOnStart=.*|muteOnStart=true|g' "$BBB_PROPERTIES"
 
