@@ -39,8 +39,6 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
-yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
-
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id low
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "High"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden false
@@ -85,6 +83,8 @@ echo "  - Setting camera pagination"
 yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
 yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 15
 yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 15
+yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
+yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
 
 echo " - Setting Screenshare and Video Constraints"
 yq w -i $KURENTO_CONF conference-media-specs.H264.tias_content 1500000
