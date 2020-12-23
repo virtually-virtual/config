@@ -39,33 +39,33 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id low
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id low
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
+
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id medium
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Medium"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id medium
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Medium"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id high
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "High"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id high
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hd
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High Definition"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id hd
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "High Definition"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 50
-
 echo "  - Setting camera thresholds"
 yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled true
+yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled false
 
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].threshold 1
 yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].profile high
