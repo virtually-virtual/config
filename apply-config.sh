@@ -117,8 +117,8 @@ sed -i 's|lockSettingsDisableMic=.*|lockSettingsDisableMic=false|g' "$BBB_PROPER
 echo " - Dont allow duplicate UserExt"
 sed -i 's|allowDuplicateExtUserid=.*|allowDuplicateExtUserid=false|g' "$BBB_PROPERTIES"
 
-echo "  - Disable recording and keep events"
-sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=true|g' "$BBB_PROPERTIES"
+
+sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=false|g' "$BBB_PROPERTIES"
 sed -i 's|allowStartStopRecording=.*|allowStartStopRecording=true|g' "$BBB_PROPERTIES"
 sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
