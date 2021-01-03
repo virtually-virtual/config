@@ -19,11 +19,11 @@ sed -i 's/^      <param name="alone-sound" value="conference\/conf-alone\.wav"\/
 
 
 
-#echo "  - Setting HTML5 Client"
-#yq w -i $HTML5_CONFIG public.app.clientTitle "Clickto"
-#yq w -i $HTML5_CONFIG public.app.appName "Clickto HTML5 Client"
-#yq w -i $HTML5_CONFIG public.app.helpLink "https://help.clickto.camp/"
-#yq w -i $HTML5_CONFIG public.app.copytight "©2020 Clickto LTD"
+echo "  - Setting HTML5 Client"
+yq w -i $HTML5_CONFIG public.app.clientTitle "Clickto"
+yq w -i $HTML5_CONFIG public.app.appName "Clickto HTML5 Client"
+yq w -i $HTML5_CONFIG public.app.helpLink "https://help.clickto.camp/"
+yq w -i $HTML5_CONFIG public.app.copyright "©2020 Clickto LTD"
 
 # Set Framerate and Resolution to high values - it will be throttled through bitrate
 #yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.ideal 5
@@ -31,10 +31,10 @@ sed -i 's/^      <param name="alone-sound" value="conference\/conf-alone\.wav"\/
 #yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.width.max 2560
 #yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.height.max 1440
 # Enable option to share screen with audio in supported browsers
-#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
-#yq w -i $HTML5_CONFIG public.app.skipCheck true
-#yq w -i $HTML5_CONFIG public.app.forceListenOnly false
-#yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
+yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
+yq w -i $HTML5_CONFIG public.app.skipCheck true
+yq w -i $HTML5_CONFIG public.app.forceListenOnly true
+yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
  
@@ -86,11 +86,11 @@ yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "High"
 #yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].profile minimal
 
 echo "  - Setting camera pagination"
-#yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
-#yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 8
-#yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 8
-#yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
-#yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
+yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
+yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 8
+yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 8
+yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
+yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
 
 #echo " - Setting Screenshare and Video Constraints"
 #yq w -i $KURENTO_CONF conference-media-specs.H264.tias_content 1500000
@@ -128,7 +128,7 @@ sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=false|g' "$BBB_PROP
 sed -i 's|allowStartStopRecording=.*|allowStartStopRecording=true|g' "$BBB_PROPERTIES"
 sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
-yq m -x --overwrite -i /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /tmp/settings.yml
+#yq m -x --overwrite -i /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /tmp/settings.yml
 
 #echo " - Enable multiple Kurento proccesses"
 #enableMultipleKurentos
