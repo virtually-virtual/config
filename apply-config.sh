@@ -39,6 +39,7 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
+yq d -i $HTML5_CONFIG public.kurento.cameraProfiles
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "Minimal"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
