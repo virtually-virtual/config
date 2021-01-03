@@ -39,7 +39,7 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.video.framerate 3
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id high-1
