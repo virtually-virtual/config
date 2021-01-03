@@ -39,29 +39,34 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id low
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal 32
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id medium
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Medium"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id niedrig
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Niedrig"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id high
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id mittel
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Mittel"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hd
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High Definition"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].hidden true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hoch
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "Hoch"
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
+
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id maximal
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "Maximal"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 
+
+
 
 echo "  - Setting camera thresholds"
 yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
@@ -81,28 +86,28 @@ yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].prof
 
 echo "  - Setting camera pagination"
 yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
-yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 15
-yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 15
+yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 8
+yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 8
 yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
 yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
 
-echo " - Setting Screenshare and Video Constraints"
-yq w -i $KURENTO_CONF conference-media-specs.H264.tias_content 1500000
-yq w -i $KURENTO_CONF conference-media-specs.H264.as_content 1500
-yq w -i $KURENTO_CONF conference-media-specs.VP8.tias_content 1500000
-yq w -i $KURENTO_CONF conference-media-specs.VP8.as_content 1500
+#echo " - Setting Screenshare and Video Constraints"
+#yq w -i $KURENTO_CONF conference-media-specs.H264.tias_content 1500000
+#yq w -i $KURENTO_CONF conference-media-specs.H264.as_content 1500
+#yq w -i $KURENTO_CONF conference-media-specs.VP8.tias_content 1500000
+#yq w -i $KURENTO_CONF conference-media-specs.VP8.as_content 1500
 
-echo " - Setting BigBlueButton-Options"
-sed -i 's|beans.presentationService.defaultUploadedPresentation=.*|beans.presentationService.defaultUploadedPresentation=${bigbluebutton.web.serverURL}/default.pdf|g' "$BBB_PROPERTIES"
+#echo " - Setting BigBlueButton-Options"
+#sed -i 's|beans.presentationService.defaultUploadedPresentation=.*|beans.presentationService.defaultUploadedPresentation=${bigbluebutton.web.serverURL}/default.pdf|g' "$BBB_PROPERTIES"
 
-sed -i 's|maxFileSizeUpload=.*|maxFileSizeUpload=30000000|g' "$BBB_PROPERTIES"
-sed -i 's|defaultWelcomeMessage=.*|defaultWelcomeMessage=Welcome|g' "$BBB_PROPERTIES"
-sed -i 's|defaultWelcomeMessageFooter=.*|defaultWelcomeMessageFooter=Welcome|g' "$BBB_PROPERTIES"
-sed -i 's|allowModsToUnmuteUsers=.*|allowModsToUnmuteUsers=false|g' "$BBB_PROPERTIES"
-sed -i 's|meetingExpireIfNoUserJoinedInMinutes=.*|meetingExpireIfNoUserJoinedInMinutes=5|g' "$BBB_PROPERTIES"
-sed -i 's|meetingExpireWhenLastUserLeftInMinutes=.*|meetingExpireWhenLastUserLeftInMinutes=5|g' "$BBB_PROPERTIES"
-sed -i 's|userInactivityInspectTimerInMinutes=.*|userInactivityInspectTimerInMinutes=60|g' "$BBB_PROPERTIES"
-sed -i 's|userInactivityThresholdInMinutes=.*|userInactivityThresholdInMinutes=240|g' "$BBB_PROPERTIES"
+#sed -i 's|maxFileSizeUpload=.*|maxFileSizeUpload=30000000|g' "$BBB_PROPERTIES"
+#sed -i 's|defaultWelcomeMessage=.*|defaultWelcomeMessage=Welcome|g' "$BBB_PROPERTIES"
+#sed -i 's|defaultWelcomeMessageFooter=.*|defaultWelcomeMessageFooter=Welcome|g' "$BBB_PROPERTIES"
+#sed -i 's|allowModsToUnmuteUsers=.*|allowModsToUnmuteUsers=false|g' "$BBB_PROPERTIES"
+#sed -i 's|meetingExpireIfNoUserJoinedInMinutes=.*|meetingExpireIfNoUserJoinedInMinutes=5|g' "$BBB_PROPERTIES"
+#sed -i 's|meetingExpireWhenLastUserLeftInMinutes=.*|meetingExpireWhenLastUserLeftInMinutes=5|g' "$BBB_PROPERTIES"
+#sed -i 's|userInactivityInspectTimerInMinutes=.*|userInactivityInspectTimerInMinutes=60|g' "$BBB_PROPERTIES"
+#sed -i 's|userInactivityThresholdInMinutes=.*|userInactivityThresholdInMinutes=240|g' "$BBB_PROPERTIES"
 sed -i 's|muteOnStart=.*|muteOnStart=true|g' "$BBB_PROPERTIES"
 
 
@@ -124,8 +129,8 @@ sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
 
 
-echo " - Enable multiple Kurento proccesses"
-enableMultipleKurentos
+#echo " - Enable multiple Kurento proccesses"
+#enableMultipleKurentos
 
 
 
