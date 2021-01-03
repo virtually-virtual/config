@@ -39,35 +39,40 @@ yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
 echo "  - Setting camera defaults"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "Minimal"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden true
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.video.framerate 3
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].hidden false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id high-1
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
 
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id niedrig
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Niedrig"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].constraints.video.framerate 3
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id high-2
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].constraints.video.framerate 3
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].constraints.video.framerate 3
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id high-3
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id mittel
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default true
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].hidden false
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].constraints.video.framerate 3
 
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hoch
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "Hoch"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].constraints.video.framerate 3
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id high-4
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].constraints.video.framerate 3
 
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id maximal
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "Maximal"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].constraints.video.framerate 3
 yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].hidden true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id high-5
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "High"
+yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].constraints.video.framerate 3
 
 #echo "  - Setting camera thresholds"
 #yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
