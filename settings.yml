@@ -1,1 +1,114 @@
-
+  public:
+    app:
+      clientTitle: Clickto
+      skipCheck: true
+      appName: Clickto HTML5 Client
+      helpLink: https://help.clickto.camp/
+      copyright: "©2020 Clickto LTD"
+      forceListenOnly: true
+      ipv4FallbackDomain: ''
+      listenOnlyMode: false
+      lockOnJoin: false
+      mirrorOwnWebcam: false
+    kurento:
+        autoShareWebcam: false
+        cameraProfiles:
+        - id: high-1
+          name: High
+          bitrate: 70
+          hidden: false
+          constraints:
+             video:
+                frameRate: 3
+        - id: high-2
+          name: High
+          bitrate: 70
+          hidden: true
+          constraints:
+             video:
+                frameRate: 3
+        - id: high-3
+          name: High
+          bitrate: 70
+          hidden: true
+          constraints:
+             video:
+                frameRate: 3
+        - id: high-4
+          name: High
+          bitrate: 70
+          hidden: true
+          constraints:
+             video:
+                frameRate: 3
+        - id: high-5
+          name: High
+          bitrate: 50
+          hidden: true
+          constraints:
+             video:
+                frameRate: 3
+        cameraQualityThresholds:
+            enabled: false
+            thresholds:
+            -   profile: high-2
+                threshold: 4
+            -   profile: high-3
+                threshold: 8
+            -   profile: high-4
+                threshold: 12
+            -   profile: high-5
+                threshold: 25
+        pagination:
+              desktopPageSizes:
+                  moderator: 15
+                  viewer: 15
+              enabled: true
+              mobilePageSizes:
+                  moderator: 4
+                  viewer: 4
+              pageChangeDebounceTime: 99
+    presentation:
+         defaultPresentationFile: default.pdf
+         panZoomThrottle: 32
+         restoreOnUpdate: false
+         uploadEndpoint: /bigbluebutton/presentation/upload
+         uploadSizeMax: 50000000
+         uploadSizeMin: 0
+         uploadValidMimeTypes:
+         -   extension: .pdf
+             mime: application/pdf
+         -   extension: .doc
+             mime: application/msword
+         -   extension: .docx
+             mime: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+         -   extension: .xls
+             mime: application/vnd.ms-excel
+         -   extension: .xlsx
+             mime: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+         -   extension: .ppt
+             mime: application/vnd.ms-powerpoint
+         -   extension: .pptx
+             mime: application/vnd.openxmlformats-officedocument.presentationml.presentation
+         -   extension: .txt
+             mime: text/plain
+         -   extension: .rtf
+             mime: application/rtf
+         -   extension: .odt
+             mime: application/vnd.oasis.opendocument.text
+         -   extension: .ods
+             mime: application/vnd.oasis.opendocument.spreadsheet
+         -   extension: .odp
+             mime: application/vnd.oasis.opendocument.presentation
+         -   extension: .odg
+             mime: application/vnd.oasis.opendocument.graphics
+         -   extension: .odc
+             mime: application/vnd.oasis.opendocument.chart
+         -   extension: .odi
+             mime: application/vnd.oasis.opendocument.image
+         -   extension: .jpg
+             mime: image/jpeg
+         -   extension: .jpeg
+             mime: image/jpeg
+         -   extension: .png
+             mime: image/png
