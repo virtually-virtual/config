@@ -19,77 +19,77 @@ sed -i 's/^      <param name="alone-sound" value="conference\/conf-alone\.wav"\/
 
 
 
-echo "  - Setting HTML5 Client"
-yq w -i $HTML5_CONFIG public.app.clientTitle "Clickto"
-yq w -i $HTML5_CONFIG public.app.appName "Clickto HTML5 Client"
-yq w -i $HTML5_CONFIG public.app.helpLink "https://help.clickto.camp/"
-yq w -i $HTML5_CONFIG public.app.copytight "©2020 Clickto LTD"
+#echo "  - Setting HTML5 Client"
+#yq w -i $HTML5_CONFIG public.app.clientTitle "Clickto"
+#yq w -i $HTML5_CONFIG public.app.appName "Clickto HTML5 Client"
+#yq w -i $HTML5_CONFIG public.app.helpLink "https://help.clickto.camp/"
+#yq w -i $HTML5_CONFIG public.app.copytight "©2020 Clickto LTD"
 
 # Set Framerate and Resolution to high values - it will be throttled through bitrate
-yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.ideal 5
-yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.max 15
-yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.width.max 2560
-yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.height.max 1440
+#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.ideal 5
+#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.frameRate.max 15
+#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.width.max 2560
+#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.video.height.max 1440
 # Enable option to share screen with audio in supported browsers
-yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
-yq w -i $HTML5_CONFIG public.app.skipCheck true
-yq w -i $HTML5_CONFIG public.app.forceListenOnly false
-yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
+#yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
+#yq w -i $HTML5_CONFIG public.app.skipCheck true
+#yq w -i $HTML5_CONFIG public.app.forceListenOnly false
+#yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
  
  
  
 echo "  - Setting camera defaults"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal 32
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].id minimal
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].name "High"
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].default false
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].bitrate 50
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.width.ideal 32
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[0].constraints.height.ideal 32
+#
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id niedrig
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Niedrig"
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
+#
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id mittel
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Mittel"
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default true
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
+##
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hoch
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "Hoch"
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
 
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].id niedrig
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].name "Niedrig"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[1].bitrate 50
-
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].id mittel
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].name "Mittel"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].default true
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[2].bitrate 50
-
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].id hoch
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].name "Hoch"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[3].bitrate 50
-
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id maximal
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "Maximal"
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
-yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate 
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].id maximal
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].name "Maximal"
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].default false
+#yq w -i $HTML5_CONFIG public.kurento.cameraProfiles.[4].bitrate #
 
 
 
-echo "  - Setting camera thresholds"
-yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled false
+#echo "  - Setting camera thresholds"
+#yq d -i $HTML5_CONFIG public.kurento.cameraQualityThresholds
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.enabled false
+#
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].threshold 1
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].profile high
 
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].threshold 1
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[0].profile high
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[1].threshold 2
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[1].profile medi#um
 
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[1].threshold 2
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[1].profile medium
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[2].threshold 3
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[2].profile low
 
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[2].threshold 3
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[2].profile low
-
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].threshold 4
-yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].profile minimal
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].threshold 4
+#yq w -i $HTML5_CONFIG public.kurento.cameraQualityThresholds.thresholds.[3].profile minimal
 
 echo "  - Setting camera pagination"
-yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
-yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 8
-yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 8
-yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
-yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
+#yq w -i $HTML5_CONFIG public.kurento.pagination.enabled true
+#yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.moderator 8
+#yq w -i $HTML5_CONFIG public.kurento.pagination.desktopPageSizes.viewer 8
+#yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.moderator 4
+#yq w -i $HTML5_CONFIG public.kurento.pagination.mobilePageSizes.viewer 4
 
 #echo " - Setting Screenshare and Video Constraints"
 #yq w -i $KURENTO_CONF conference-media-specs.H264.tias_content 1500000
