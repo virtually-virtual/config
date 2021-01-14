@@ -35,7 +35,7 @@ yq w -i $HTML5_CONFIG public.kurento.screenshare.constraints.audio true
 yq w -i $HTML5_CONFIG public.app.skipCheck true
 yq w -i $HTML5_CONFIG public.app.forceListenOnly true
 yq w -i $HTML5_CONFIG public.app.listenOnlyMode false
- 
+yq w -i $HTML5_CONFIG public.kurento.cameraTimeouts.baseTimeout 60000
  
  
 echo "  - Setting camera defaults"
