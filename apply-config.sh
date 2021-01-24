@@ -134,6 +134,9 @@ sed -i 's|disableRecordingDefault=.*|disableRecordingDefault=false|g' "$BBB_PROP
 sed -i 's|allowStartStopRecording=.*|allowStartStopRecording=true|g' "$BBB_PROPERTIES"
 sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
+# Log only errors
+sed -i 's|^appLogLevel=.*|appLogLevel=ERROR|' "$BBB_PROPERTIES"
+
 #yq m -x --overwrite -i /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /tmp/settings.yml
 
 #echo " - Enable multiple Kurento proccesses"
