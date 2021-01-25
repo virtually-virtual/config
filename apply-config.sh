@@ -135,10 +135,10 @@ sed -i 's|allowStartStopRecording=.*|allowStartStopRecording=true|g' "$BBB_PROPE
 sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
 # Log only errors
-sed -i 's|^appLogLevel=.*|appLogLevel=ERROR|' "$BBB_PROPERTIES"
-sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/nginx.conf  
-sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/sites-available/bigbluebutton
-yq w -i  /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml log.level error
+#sed -i 's|^appLogLevel=.*|appLogLevel=ERROR|' "$BBB_PROPERTIES"
+#sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/nginx.conf  
+#sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/sites-available/bigbluebutton
+#yq w -i  /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml log.level error
 #sed -i  's|--gst-debug-level=.|--gst-debug-level=1|' /usr/lib/systemd/system/kurento-media-server.service
 #sed -i 's|^stdout-loglevel.*|stdout-loglevel = "ERROR"|' /etc/bbb-fsesl-akka/application.conf
 #sed -i 's|^loglevel.*|loglevel = "ERROR"|' /etc/bbb-fsesl-akka/application.conf
