@@ -136,7 +136,8 @@ sed -i 's|keepEvents=.*|keepEvents=true|g' "$BBB_PROPERTIES"
 
 # Log only errors
 sed -i 's|^appLogLevel=.*|appLogLevel=ERROR|' "$BBB_PROPERTIES"
-
+sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/nginx.conf  
+sed -i 's|access_log.*|access_log /dev/null;|g' /etc/nginx/sites-available/bigbluebutton
 #yq m -x --overwrite -i /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /tmp/settings.yml
 
 #echo " - Enable multiple Kurento proccesses"
